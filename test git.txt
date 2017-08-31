@@ -1,1 +1,8 @@
 This is the first line, 
+
+Repository: new file
+view in explorer: offline folder
+commit to master: add comment and confirm change
+push to origin: upload 
+
+If it's a collaborative project, people can work in different places on the same project, and each changes can be recorded and traced.
