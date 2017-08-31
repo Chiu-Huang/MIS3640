@@ -1,0 +1,13 @@
+Python:
+use others'Library: import this             ; this is the name of library
+
+cmd:python --> cmd becomes python
+
+python interpreter--> python interface, 3.6.2
+
+
+idle --> you can save the code you write, rarely use it because there are something better
+VS code is better
+
+
+print('')  --> display
