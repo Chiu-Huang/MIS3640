@@ -1,4 +1,4 @@
-print('hello,Zhi')
+print('hello,Huang')
 print(2**6)
 print(2016-23)
 print(15/3)
@@ -22,7 +22,7 @@ first_name = 'CC'
 Last_name = 'Huang'
 
 print (first_name + Last_Name*10)
-
+print("a"*10)
 
 'today is %2d-%02d.' %(9,6)
 'pi=%.2f.' %3.1415926

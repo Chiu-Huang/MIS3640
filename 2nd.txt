@@ -1,0 +1,13 @@
+' missing, string not end
+'' missing, treat string as variable 
+
+printe()  , printe function is not defined
+
+
+++2 =2 
+
+--2 =2
+
+2 2 error, we cannot have space between numbers 
+
+
