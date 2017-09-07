@@ -41,27 +41,30 @@ let rec expt (a:int) (b:int):int =
 
 
 let rec choose (n:int) (k:int):int =
-if k>0 then n /k /(n-k) * choose (n-1) (k-1) else n;;
+if k>1 then n /(n-k) * choose (n-1) (k-1)  else n;;
 
+(*COME BACK Later*)
+
+let rec choose (n:int) (k:int):int =
+   if n = k then  1 else ((choose (n-1) k) * n) / (n-k) ;;
 
 
 let rec gcd (a:int) (b:int):int  = 
-  failwith "gcd not implemented"
+  if b = 0 then a 
+  else gcd (b) (a mod b);;
 
 let rec coprimes (n:int):int list = 
-  failwith "coprimes not implemented"
-
+  (*Come Back Later*)
   
 
 (* Question 2 *)
 
 
 let rec tripleUp (xs:'a list):'a list =
-  failwith "tripleUp not implemented"
-
+  xs + tripleUp (xs)
 
 let rec nth (n:int) (xs:'a list):'a =
-  failwith "nth not implemented"
+ if 
 
 
 let rec last (xs:'a list):'a = 
