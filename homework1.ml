@@ -10,6 +10,24 @@ Remarks, if any:
 
 *)
 
+
+(*
+ *
+ * Please fill in this file with your solutions and submit it
+ *
+ * The functions below are stubs that you should replace with your
+ * own implementation.
+ *
+ * PLEASE DO NOT CHANGE THE TYPES IN THE STUBS BELOW.
+ * Doing so risks making it impossible for me to test your code.
+ *
+ * Always make sure you can #use this file in a FRESH OCaml shell
+ * before submitting it. It has to load without any errors.
+ *
+ *)
+
+
+
 (* Question 1 *)
 
 
