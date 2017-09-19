@@ -60,6 +60,14 @@ print (a)
 #2. False, False, True, False
 
 #3. 
+
+
+
+
+
+
+
+
 import time
 raw = time.time()
 k = (raw / 60/60/24/365)
@@ -81,6 +89,8 @@ nov = oct + 30
 dec = nov + 31
 
 
+
+pass 
 If year % 4 <> 0:
     if p < (a):
         month = 1
@@ -164,9 +174,4 @@ b = 29 & if p < (a):
 
 date = round (p *365 - month * 30 -0.5)
 print (year,month,date)
-
-
-
-
-
 

@@ -10,15 +10,18 @@ n = 60
 cost = c + 3 + 0.75 * (n-1)
 print("$",cost)
 
-Rseconds = 15 *2 + 12 * 3
-Rminutes = 52 + 8 + 3 * 7 + 8
-Rhours = 6
 
-seconds = Rseconds % 60
-minutes = (Rminutes + round (Rseconds/60)) % 60
-hours = round ((Rminutes + round (Rseconds/60))/60) + Rhours   # need adjustment on the round, should be rounddown
 
-print (hours,":",minutes,":",seconds)
+def timeproblem():
+    Rseconds = 15 *2 + 12 * 3
+    Rminutes = 52 + 8 + 3 * 7 + 8
+    Rhours = 6
+    seconds = Rseconds % 60
+    minutes = (Rminutes +  (Rseconds/60) // 1) % 60
+    hours = round ((Rminutes + (Rseconds/60))//60) + Rhours   # FIXED: need adjustment on the round, should be rounddown
+    print ("The current time is %02d : %02d : %02d." %(hours, minutes, seconds))
+
+   
 
 
     grade = (89-82)/82 *100

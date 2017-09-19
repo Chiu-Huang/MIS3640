@@ -114,16 +114,10 @@ let rec addV (v:int list) (w:int list):int list =
 
 
 
-(*Fail*
-
 let rec outer (v:int list) (w:int list):int list list=
-match (v,w) with
- ([],[]) -> []
-| (a::b,[]) -> []
-| ([],c::d) -> []
-| (a::b,c::d) -> if d = []  
- then [a * c] @ outer (v) (d) , outer (b) (w))
- else [a * c] @ outer (v) (d);;
+  match v with
+  [] -> []
+  |x::xs' -> scaleV (x) (w) :: outer (xs') (w)
 
 *)
 
