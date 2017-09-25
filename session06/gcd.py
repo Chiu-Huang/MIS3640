@@ -15,3 +15,24 @@ def gcd (x,y):
         return x
     else:
         return gcd(y,x % y)
+
+import turtle
+import math
+
+g = turtle.Turtle()
+
+def polyline (g,n,l,angle):
+    g.speed(0)
+    for i in range (n):
+        g.fd(l)
+        g.lt(angle)
+
+def circle (g,r):
+    g.speed(0)
+    arc (g,r,360)    
+
+def arc (g,r,angle):
+    g.speed(0)
+    polyline (g,int(720*angle/360),2*math.pi*r/720,360/720)
+
+turtle.mainloop()
