@@ -32,7 +32,7 @@ def test_square_root(n):
     for row in L:
         print ("{: >4} {: >24} {: >24} {: >24}".format(*row))
 
-
+test_square_root(10)
 
 
 
