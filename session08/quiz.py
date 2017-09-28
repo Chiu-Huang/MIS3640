@@ -8,16 +8,16 @@ Question 1:
     a, b: two integers
     Returns True if either one is 9, or if their sum or difference is 9. 
     """
-def crazy_about_9(a, b):
-    return (a == 9 or b == 9) or (a + b == 9) or ( abs(a -b) == 9)
+# def crazy_about_9(a, b):
+#     return (a == 9 or b == 9) or (a + b == 9) or ( abs(a -b) == 9)
 
 
 # When you've completed your function, uncomment the
 # following lines and run this file to test!
 
-print(crazy_about_9(2, 9))
-print(crazy_about_9(4, 5))
-print(crazy_about_9(3, 8))
+# print(crazy_about_9(2, 9))
+# print(crazy_about_9(4, 5))
+# print(crazy_about_9(3, 8))
 
 
 """
@@ -75,5 +75,5 @@ def sum_squares(n):
 # When you've completed your function, uncomment the
 # following lines and run this file to test!
 
-print(sum_squares(1))
-print(sum_squares(100))
+# print(sum_squares(1))
+# print(sum_squares(100))

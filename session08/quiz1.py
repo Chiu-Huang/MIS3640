@@ -15,9 +15,9 @@ def crazy_about_9(a, b):
 # When you've completed your function, uncomment the
 # following lines and run this file to test!
 
-print(crazy_about_9(2, 9))
-print(crazy_about_9(4, 5))
-print(crazy_about_9(3, 8))
+# print(crazy_about_9(2, 9))
+# print(crazy_about_9(4, 5))
+# print(crazy_about_9(3, 8))
 
 
 """
@@ -48,6 +48,12 @@ def leap_year(year):
     else:
         return False
 
+
+def leap_year (year):
+    return (year%4 == 0 and year%100 != 0) or year%400 == 0
+
+
+
 # When you've completed your function, uncomment the
 # following lines and run this file to test!
 
@@ -71,9 +77,16 @@ def sum_squares(n):
             s += i**2
     return (s)
 
+def sum_sq (n):
+    s = 0
+    for i in range (1,n+1,1):
+            s += i**2
+    return (s)
+
+
 
 # When you've completed your function, uncomment the
 # following lines and run this file to test!
 
-print(sum_squares(1))
-print(sum_squares(100))
+# print(sum_squares(1))
+# print(sum_squares(100))
