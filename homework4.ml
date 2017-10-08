@@ -79,7 +79,7 @@ let prepend (x:'a) (xss:'a list list) : 'a list list =
 let rec prefixes (xs:'a list) : 'a list list =   
   match xs with
   []   -> [[]]
-  | x::xss -> []::List.map (fun k -> x :: k) (prefixes xss);; 
+  | x::xss -> []::List.map (fun k -> x :: k) (prefixes xss)
 
 
 let rec augment_suffixes (xs:'a list) : ('a * 'a list) list =
@@ -88,13 +88,6 @@ let rec augment_suffixes (xs:'a list) : ('a * 'a list) list =
   |x::xss ->  (x , xs) :: augment_suffixes xss
 
 
-
-
-
-let rec prefixes (xs:'a list) : 'a list list =   
-  match xs with
-  []   -> [[]]
-  | x::xss -> []::List.map (fun k -> x :: k) (prefixes xss);; 
 
 let rec suffixes xs =
   match xs with
