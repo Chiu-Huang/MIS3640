@@ -56,6 +56,9 @@ def most_common(hist):
     hist: map from word to frequency
     returns: list of (frequency, word) pairs
     """
+
+    # append vs extend 
+    # for key in sorted (d.key()):
     wflist = []
     for key in hist:
         wflist += [(hist[key], key)]
