@@ -39,6 +39,46 @@ def draw_text(surf,text,size,x,y,color):
     text_rect.center =(x,y)
     surf.blit(text_surface,text_rect)
 
+def text_box(surf, text):
+    global WIDTH, HEIGHT
+    fontsize = 30
+    font = pg.font.SysFont("arial", fontsize)
+    fontHeight = font.size ("Tg")[1]
+    rect = pg.Rect([0,4/6*HEIGHT,WIDTH,HEIGHT])    
+    rect.left = 10
+    rect.top = 4/6*HEIGHT
+    pygame.draw.rect(screen, black, [0,4/6*HEIGHT,WIDTH,HEIGHT])
+    y = rect.top
+    lineSpacing = -2
+
+    while text:
+        i = 1
+
+        # determine if the row of text will be outside our area
+        if y + fontHeight > rect.bottom:
+            break
+
+        # determine maximum width of line
+        while font.size(text[:i])[0] < WIDTH and i < len(text):
+            i += 1
+            print (i)
+        # if we've wrapped the text, then adjust the wrap to the last word      
+        if i < len(text): 
+            i = text.rfind(" ", 0, i) + 1
+
+        # render the line and blit it to the >surf
+        image = font.render(text[:i], True, white)
+
+        surf.blit(image, (rect.left, y))
+        y += fontHeight + lineSpacing
+
+        # remove the text we just blitted
+        text = text[i:]
+
+    return text
+   
+
+
 def button (msg,x,y,w,h,color,icolor,action=None):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
@@ -160,9 +200,7 @@ def gamemenu():
             sys.exit()
         if e.type == pygame.KEYDOWN:
             if e.key == pygame.K_ESCAPE:
-                pygame.quit()
-                sys.exit()
-
+                quitf()
       # Update the screen
         pygame.display.update(rect_list)
 
@@ -176,8 +214,8 @@ def gameover():
             if event.type == pg.QUIT:
                 pg.quit()
 
-
-
+def fight (a, b):
+    a.update_after_monster_dies(b)
 
 
 def quitf():
@@ -188,94 +226,8 @@ def quitf():
 #Define Global Variables
 index = [0.8,0.5,0.3]    # usage of attribute
 levelup = False
-class Player (pg.sprite.Sprite):
-    # sprite of the Player
-    global index
-    global levelup
-
-
-    def dice_attribution(self,x):
-        for i in self.attribute:
-            k = 1
-            for roll_times in range (0,k,1):
-                self.attribute[i] += dice(x)
-
-
-    def __init__(self,race = "human"):
-        pg.sprite.Sprite.__init__(self)
-        self.attribute = {'strength':0, 'dexterity':0, 'wisdom':0}
-        self.level = 1
-
-        Player.dice_attribution(self, 18)
-        # race formation
-        if race == "orc":
-            self.buff = [1.3,1.1,0.8,0.5] # hp buff, strength buff,dex debuff, widsom debuff 
-        if race == "human":
-            self.buff = [1,1,11,1.5] # hp buff, strength buff,dex debuff, widsom debuff
-        if race == "elf":
-            self.buff = [0.9,1.1,1.4,1.2] # hp buff, strength buff,dex debuff, widsom debuff
-        
-        # hp formula
-        k = (50 * self.level + self.attribute['strength']*index[0]) *self.buff[0]
-        self.maxhp = round (k,0)
-        self.hp = self.maxhp
-        self.exp = 0
-        self.gold = 1000
-        self.item_list = []
-        self.equipped_list = []
-        
-    def expgain(self):
-        self.exp += 100
-    # def minushp(self):
-    #     self.hp = 0
-    def update(self):
-        global levelup
-        if self.exp >= 100 * (self.level):
-            levelup = True
-        if levelup:
-            self.exp -= 100*self.level
-            self.level += 1
-            Player.dice_attribution(self,5)
-            self.maxhp = round ((50 * self.level + self.attribute['strength']*index[0]) *self.buff[0],0)
-            self.hp = self.maxhp    #renew hp
-            levelup = False     
-
-
-
-class Monster (pg.sprite.Sprite):
-    # sprite of the Player
-    global index
-    global levelup
-
-    def __init__(self):
-        pg.sprite.Sprite.__init__(self)
-        self.attribute = {'strength':0, 'dexterity':0, 'wisdom':0}
-        self.level = random.randint(1,5)
-        # def dice_attribution(x):
-        #     for i in self.attribute:
-        #         k = int(input("How many dices do you want to allocate to {}?".format(i)))
-        #         for roll_times in range (0,k,1):
-        #             self.attribute[i] += dice(x)
-
-        Player.dice_attribution(self, 18)        
-        # hp formula
-        k = (30 * self.level + self.attribute['strength']*index[0])
-        self.maxhp = round (k,0)
-        self.hp = self.maxhp
-        self.exp = 20 + self.level * random.randint(30,50)
-        self.gold = 50 + self.level * random.randint(0,200)
-        self.item_list = []
-        
-    def minushp(self):
-        self.hp = 0
-
-    def update(self):
-        if self.hp <= 0:
-            player.gold += self.gold
-            player.exp +=self.exp
-            self.kill()
             
-
+from player import *
 
         
     # def update(self):
@@ -287,15 +239,13 @@ class Monster (pg.sprite.Sprite):
 races = random.choice (["orc", 'human', 'elf'])
 
 all_sprites = pg.sprite.Group()
-player = Player(races)
+player = player(race = "orc")
 all_sprites.add(player)
 monsters = pygame.sprite.Group()
 for i in range (0,8,1):
-    monster1 = Monster()
+    monster1 = monster()
     monsters.add(monster1)
-
-
-
+    print(monster1.x, monster1.y)
 
 
 
@@ -310,6 +260,11 @@ while running:
     #keep loop running at the same speed
     clock.tick(FPS)
     # Process input (events)
+    if player.x == monster1.x and player.y == monster1.y:
+        # player.fight = True
+        print ("encounter")
+        # player.fight = True 
+        # player.fight (monster1)
     if player.hp <= 0:
         gameover()
     for event in pg.event.get():
@@ -321,13 +276,29 @@ while running:
                 monster1.minushp()
             if event.key == pg.K_TAB:
                 gamemenu()
+                pygame.display.update(rect_list)
+
+            if event.key == pg.K_w:
+                player.y += 1
+            if event.key == pg.K_s:
+                player.y -= 1
+            if event.key == pg.K_a:
+                player.x -= 1
+            if event.key == pg.K_d:
+                player.x += 1
+            if event.key == pg.K_p:
+                player.work()
+            if event.key == pg.K_o:
+                player.training()
+                        
+                # add flip 
             # if event.key == pg.K_SPACE:
             #     menu()
     
     
     
     
-    
+
     # Update
     all_sprites.update()
 
@@ -336,15 +307,17 @@ while running:
 
 
     # draw and render
+
     screen.fill(Color.Salmon)
     # screen.blit(menu,menu_rect)
     draw_text(screen,"hp:" + str(player.maxhp), 18, 30,30,white)
     draw_text(screen,"Exp:" + str(player.exp), 18, 30,60,white)
     draw_text(screen,"Strength:" + str(player.attribute['strength']), 18, 30,90,white)
     draw_text(screen,"Level:" + str(player.level), 18, 30,120,white)
-
+    draw_text(screen,"Coordinate: (" + str(player.x) + " , " + str(player.y) + ")", 18, 30,150,white)
     # all_sprites.draw(screen)
-
+    # pygame.draw.rect(screen, black, (200,150,100,50))
+    text_box(screen,"dijdwq dijwqdqijwdid djiwqdjiqj  dwqjdiwqdjiwd dwqijdwq jdiwqjdiwqjd jidwqjdiwqjd djiwqdjwqidjqwid jdqiwjdqijdwqd djwqid")
     # draw_text(screen,"Hello world",50,400,300)             both functions work perfectly fine
     # button("hello world",400,300,100,100,Color.Salmon,Color.Orange,quitf)
     pg.display.flip()

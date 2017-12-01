@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+</head>
+<body>
+<h1>Calculator</h1>
+<form method="POST" name="calculator">
+    {% if error %}
+    <p style='color:red'>This equation does not have real number solution.</p>
+    {% endif %}
+    <p>
+        Please enter three coefficients of a quadratic function:
+    </p>
+    <p>
+        <input type="text" name='a'>x^2 +
+        <input type="text" name='b'>x +
+        <input type="text" name='c'> = 0
+    </p>
+    <p>
+        <input type="submit" value="Magic Happens">
+    </p>
+</form>
+</body>
+</html>

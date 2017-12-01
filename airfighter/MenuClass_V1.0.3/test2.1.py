@@ -160,9 +160,7 @@ def gamemenu():
             sys.exit()
         if e.type == pygame.KEYDOWN:
             if e.key == pygame.K_ESCAPE:
-                pygame.quit()
-                sys.exit()
-
+                quitf()
       # Update the screen
         pygame.display.update(rect_list)
 
@@ -176,8 +174,8 @@ def gameover():
             if event.type == pg.QUIT:
                 pg.quit()
 
-
-
+def fight (a, b):
+    a.update_after_monster_dies(b)
 
 
 def quitf():
@@ -201,10 +199,13 @@ class Player (pg.sprite.Sprite):
                 self.attribute[i] += dice(x)
 
 
-    def __init__(self,race = "human"):
+    def __init__(self,race):
         pg.sprite.Sprite.__init__(self)
         self.attribute = {'strength':0, 'dexterity':0, 'wisdom':0}
         self.level = 1
+        
+        self.x = 0
+        self.y = 0
 
         Player.dice_attribution(self, 18)
         # race formation
@@ -264,7 +265,12 @@ class Monster (pg.sprite.Sprite):
         self.hp = self.maxhp
         self.exp = 20 + self.level * random.randint(30,50)
         self.gold = 50 + self.level * random.randint(0,200)
-        self.item_list = []
+        
+        # add parameter (None)
+        # self.item_list = []
+
+
+
         
     def minushp(self):
         self.hp = 0
@@ -321,13 +327,26 @@ while running:
                 monster1.minushp()
             if event.key == pg.K_TAB:
                 gamemenu()
+                pygame.display.update(rect_list)
+
+            if event.key == pg.K_w:
+                player.y += 1
+            if event.key == pg.K_s:
+                player.y -= 1
+            if event.key == pg.K_a:
+                player.x -= 1
+            if event.key == pg.K_d:
+                player.x += 1
+        
+                        
+                # add flip 
             # if event.key == pg.K_SPACE:
             #     menu()
     
     
     
     
-    
+
     # Update
     all_sprites.update()
 
@@ -336,12 +355,14 @@ while running:
 
 
     # draw and render
+
     screen.fill(Color.Salmon)
     # screen.blit(menu,menu_rect)
     draw_text(screen,"hp:" + str(player.maxhp), 18, 30,30,white)
     draw_text(screen,"Exp:" + str(player.exp), 18, 30,60,white)
     draw_text(screen,"Strength:" + str(player.attribute['strength']), 18, 30,90,white)
     draw_text(screen,"Level:" + str(player.level), 18, 30,120,white)
+    draw_text(screen,"Coordinate: (" + str(player.x) + " , " + str(player.y) + ")", 18, 30,150,white)
 
     # all_sprites.draw(screen)
 
